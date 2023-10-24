@@ -1,0 +1,8 @@
+name: crud-react-genezio-app-server
+region: us-east-1
+language: js
+cloudProvider: genezio
+classes:
+  - path: user.js
+    type: jsonrpc
+    methods: []

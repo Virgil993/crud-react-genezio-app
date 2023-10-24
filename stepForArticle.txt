@@ -1,10 +1,23 @@
 1 - have node and npm installed
 2 - npm install genezio -g 
 3 - genezio login
-4 - in the root directory run genezio init
+4 - in the root directory run genezio init and call your project crud-react-genezio-app-server
 5 - in server directory run npm init -y
 6 - in server directory run npm install mongoose dotenv
 7 - create a MongoDB Database
 8 - create a dotenv file which has the mongoDB URI 
 9 - create a models directory insider server
 10 - inside the models directory create a user schema
+11 - create the user class by running genezio addClass user.js
+12 - connect to the DB 
+13 - Create the methods for CRUD
+14 - run genezio local in your server directory and copy the command npm link
+15 - run npx create-react-app crud-react-genezio-app-client
+16 - in the client directory run npm install react-router-dom
+17 - create a view directory and a styles directory inside the client directory
+18 - create a dashboard and style it with css
+19 - In the client/src directory there is a file called App.js, where we need to set up routing
+20 - run the npm link command
+21 - Add the proper import in the dashboard import {User} from @genezio-sdk/project-name
+22 - Create an AddUser view and style it 
+23 - Render the users in the dashboard by users.map
