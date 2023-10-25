@@ -14,6 +14,7 @@
 14 - run genezio local in your server directory and copy the command npm link
 15 - run npx create-react-app crud-react-genezio-app-client
 16 - in the client directory run npm install react-router-dom and run npm start to see your development server
+16.5 - In your app.css apply the following code
 17 - create a view directory and a styles directory inside the client directory
 18 - create a dashboard and style it with css
 19 - In the client/src directory there is a file called App.js, where we need to set up routing

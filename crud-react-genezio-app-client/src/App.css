@@ -1,38 +1,62 @@
-.App {
+.header-all {
+  background-color: bisque;
   text-align: center;
+  font-size: 30px;
+  width: 100%;
+  height: 80px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.header {
+  text-align: center;
+  font-size: 30px;
+  width: 100%;
+  height: 80px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.form-group {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 10px;
+}
+.form-group > label {
+  font-size: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.form-group > input {
+  height: 30px;
+  font-size: 16px;
+  border-radius: 10px;
+  padding-left: 10px;
+  border: 1px solid black;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.radio-button-container {
+  font-size: 20px;
+  text-align: left;
+}
+.radio-button-container > input {
+  transform: scale(1.5);
+  margin-right: 10px;
+}
+
+.submit > button {
+  font-size: 20px;
+  border-radius: 10px;
+  height: 40px;
+  border: 1px solid black;
+  width: 100%;
+}
+
+.submit > button:hover {
+  cursor: pointer;
+}
+
+.error-alert {
+  font-size: 20px;
+  color: red;
 }
