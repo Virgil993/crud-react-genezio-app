@@ -16,6 +16,18 @@ function Dashboard() {
     setUsers(res.users);
   };
 
+  const deleteUser = async (email) => {
+    const res = await User.delete(email);
+    if (!res || !res.success) {
+      alert("There was an error at deleting the user, please try again later");
+      return;
+    }
+    const newUsers = users.filter((element) => {
+      return element.email != email;
+    });
+    setUsers([...newUsers]);
+  };
+
   React.useEffect(() => {
     if (!users) {
       getAllUsers();
@@ -25,6 +37,7 @@ function Dashboard() {
     <></>
   ) : (
     <div className="dashboard">
+      <div className="header-all">Users management system</div>
       <div className="header">All users</div>
       {users.length !== 0 ? (
         <div className="users-container">
@@ -35,6 +48,31 @@ function Dashboard() {
                 <div>Email : {element.email}</div>
                 <div>Gender : {element.gender}</div>
                 <div>Verified : {element.verified.toString()}</div>
+                <div>
+                  <button
+                    onClick={() => navigate("/editUser/" + element.email)}
+                  >
+                    Edit
+                  </button>
+                </div>
+                <div>
+                  <button
+                    onClick={(event) => {
+                      event.preventDefault();
+                      var answer = window.confirm(
+                        "Are you sure you want to delete this user?"
+                      );
+                      if (answer) {
+                        deleteUser(element.email);
+                      } else {
+                        console.log("we dont delete the user");
+                        return;
+                      }
+                    }}
+                  >
+                    Delete{" "}
+                  </button>
+                </div>
               </div>
             );
           })}

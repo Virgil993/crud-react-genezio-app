@@ -1,0 +1,22 @@
+.edit-user {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-user-container {
+  width: 250px;
+  margin-top: 30px;
+  margin-bottom: 100px;
+}
+
+.edit-user-container > form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.form-group > div {
+  font-size: 20px;
+}
