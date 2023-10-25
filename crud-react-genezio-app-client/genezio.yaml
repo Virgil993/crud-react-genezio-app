@@ -1,0 +1,7 @@
+name: crud-react-genezio-app-server
+region: us-east-1
+language: ts
+cloudProvider: genezio
+frontend:
+  path: ./build
+  subdomain: cyan-colonial-python

@@ -13,14 +13,30 @@
 13 - Create the methods for CRUD
 14 - run genezio local in your server directory and copy the command npm link
 15 - run npx create-react-app crud-react-genezio-app-client
-16 - in the client directory run npm install react-router-dom
+16 - in the client directory run npm install react-router-dom and run npm start to see your development server
 17 - create a view directory and a styles directory inside the client directory
 18 - create a dashboard and style it with css
 19 - In the client/src directory there is a file called App.js, where we need to set up routing
-20 - run the npm link command
-21 - Add the proper import in the dashboard import {User} from @genezio-sdk/project-name
-22 - Create an AddUser view and style it then make a button in dashboard to navigate to that view  
+20 - run the npm link command to start testing your functions on the local server
+21 - Create an AddUser view and style it then make a button in dashboard to navigate to that view
+22 - Add the proper import in the dashboard import {User} from @genezio-sdk/project-name  
 23 - Render the users in the dashboard by users.map
 24 - create an edit button  in dashboard
 25 - create an edit user view with its own style then make a button in dashboard to navigate to that view
 26 - create a delete function that deletes the user in the dashboard
+27 - deploy your genezio app and set the env variables 
+28 - test it in the local frontend dev server (Rerun the npm instal @genezio-sdk command)
+28.5 - create a babelrc file in the root of your project and add 
+{
+  "presets": ["@babel/preset-env", "@babel/preset-react"]
+}
+29 - run npm run build in client
+30 - create a genezio.yaml file in your client directory and add the following lines
+name: crud-react-genezio-app-server
+region: us-east-1
+cloudProvider: genezio
+frontend:
+  path: ./build
+
+33 - run genezio deploy --frontend in client
+34 - your app is fully deployed and ready to be used

@@ -1,4 +1,4 @@
 generateSdk: true
-path: C:\Users\VIRGIL~1.TUR\AppData\Local\Temp\local-genezio\server-us-east-1\sdk
+path: C:\Users\VIRGIL~1.TUR\AppData\Local\Temp\local-genezio\crud-react-genezio-app-server-us-east-1\sdk
 language: js
 packageManager: npm

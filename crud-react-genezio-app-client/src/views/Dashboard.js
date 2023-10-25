@@ -2,7 +2,6 @@ import React from "react";
 import "../styles/Dashboard.css";
 import { useNavigate } from "react-router-dom";
 import { User } from "@genezio-sdk/crud-react-genezio-app-server_us-east-1";
-
 function Dashboard() {
   const [users, setUsers] = React.useState(null);
   const navigate = useNavigate();
