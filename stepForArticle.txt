@@ -1,11 +1,18 @@
 1 - have node and npm installed
 2 - npm install genezio -g 
-3 - genezio login
-4 - in the root directory run genezio init and call your project crud-react-genezio-app-server
+3 - run genezio , this commadn should take care of the 
+4 - in the root directory run genezio 
+4.1 - choose empty backend 
+4.2 - choose empty frontend 
+4.3 - and call you project crud-app
+4.4 - choose npm 
 5 - in server directory run npm init -y
-6 - in server directory run npm install mongoose dotenv
-7 - create a MongoDB Database
-8 - create a dotenv file which has the mongoDB URI 
+6 - in server directory run npm install pg dotenv
+7 - Go to the genezio dashboard and integrate the project with  Neon postgress
+    -Create a Neon Account
+    - create a Database
+    - set project details
+8 - create a dotenv file which has the Neon Postgress URL
 9 - create a models directory insider server
 10 - inside the models directory create a user schema
 11 - create the user class by running genezio addClass user.js
