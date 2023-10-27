@@ -1,12 +1,35 @@
 // server-crud-app/user.js
 import UserModel from "./models/userModel";
 import mongoose from "mongoose";
+import { GenezioDeploy } from "@genezio/types";
+
+export type User = {
+  _id: string;
+  name: string;
+  email: string;
+  gender: string;
+  verified: boolean;
+};
+
+export type AllUsersResponse = {
+  success: boolean;
+  msg?: string;
+  users?: Array<User>;
+  err?: string;
+};
+
+export type UserResponse = {
+  success: boolean;
+  msg?: string;
+  user?: User;
+  err?: string;
+};
 
 /**
  * The User server class that will be deployed on the genezio infrastructure.
  */
 @GenezioDeploy()
-export class User {
+export class UserHandler {
   constructor() {
     this.#connect();
   }
@@ -17,7 +40,7 @@ export class User {
   #connect() {
     mongoose.set("strictQuery", false);
     try {
-      mongoose.connect(process.env.MONGO_DB_URI);
+      mongoose.connect(process.env.NEON_POSTGRES_URL || "");
     } catch (err) {
       console.log(err);
     }
@@ -35,7 +58,12 @@ export class User {
    * @returns An object containing a boolean property "success" which
    * is true if the creation was successfull, false otherwise.
    */
-  async createUser(name, email, gender, verified) {
+  async createUser(
+    name: string,
+    email: string,
+    gender: string,
+    verified: boolean
+  ): Promise<UserResponse> {
     // Check if email is the right format using regex
     if (!email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
       return { success: false, msg: "Wrong email format" };
@@ -48,19 +76,19 @@ export class User {
       return { success: false, msg: "Email already exists" };
     }
     // Create the user and add it to the database
-    var err,
-      newUser = await UserModel.create({
+
+    try {
+      var newUser: User = await UserModel.create({
         name: name,
         email: email,
         gender: gender,
         verified: verified,
       });
-
-    if (err) {
+    } catch (err) {
       return {
         success: false,
         msg: "Error at database",
-        error: err,
+        err: err,
       };
     }
     // After all the operations are succesfull then we return the new user
