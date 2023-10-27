@@ -51,6 +51,8 @@ web_modules/
 # Optional npm cache directory
 .npm
 
+crud-react-genezio-app-server/genezio.local.yaml
+
 # Optional eslint cache
 .eslintcache
 

@@ -1,3 +1,4 @@
+// server-crud-app/models/userModel.js
 import mongoose from "mongoose";
 const usersSchema = new mongoose.Schema({
   name: {

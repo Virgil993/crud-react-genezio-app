@@ -1,7 +1,7 @@
 import React from "react";
-import "../styles/Dashboard.css";
 import { useNavigate } from "react-router-dom";
 import { User } from "@genezio-sdk/crud-react-genezio-app-server_us-east-1";
+
 function Dashboard() {
   const [users, setUsers] = React.useState(null);
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ function Dashboard() {
   };
 
   const deleteUser = async (email) => {
-    const res = await User.delete(email);
+    const res = await User.deleteUser(email);
     if (!res || !res.success) {
       alert("There was an error at deleting the user, please try again later");
       return;
