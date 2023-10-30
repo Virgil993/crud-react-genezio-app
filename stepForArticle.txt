@@ -7,7 +7,7 @@
 4.3 - and call you project crud-app
 4.4 - choose npm 
 5 - in server directory run npm init -y
-6 - in server directory run npm install pg dotenv
+6 - in server directory run npm install pg dotenv sequlize 
 7 - Go to the genezio dashboard and integrate the project with  Neon postgress
     -Create a Neon Account
     - create a Database
@@ -19,7 +19,7 @@
 12 - connect to the DB 
 13 - Create the methods for CRUD
 14 - run genezio local in your server directory and copy the command npm link
-15 - run npx create-react-app crud-react-genezio-app-client
+15 - run npx create-react-app crud-react-genezio-app-client --template typescript
 16 - in the client directory run npm install react-router-dom and run npm start to see your development server
 16.5 - In your app.css apply the following code
 17 - create a view directory and a styles directory inside the client directory

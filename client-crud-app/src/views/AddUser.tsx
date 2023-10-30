@@ -1,37 +1,25 @@
 import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import {
-  UserHandler,
-  User,
-} from "@genezio-sdk/crud-react-genezio-app-server_us-east-1";
+import { useNavigate } from "react-router-dom";
+import { UserHandler } from "@genezio-sdk/crud-react-genezio-app-server_us-east-1";
 
-function EditUser() {
+function AddUser() {
+  const [name, setName] = React.useState<string>("");
+  const [email, setEmail] = React.useState<string>("");
+  const [verified, setVerified] = React.useState<boolean | null>(null);
+  const [gender, setGender] = React.useState<string>("");
+  const [error, setError] = React.useState<string>("");
   const navigate = useNavigate();
-  const params = useParams();
-  const [user, setUser] = React.useState(null);
-  const [name, setName] = React.useState("");
-  const [verified, setVerified] = React.useState(null);
-  const [gender, setGender] = React.useState(null);
-  const [error, setError] = React.useState("");
-
-  const getUser = async (email) => {
-    const res = await UserHandler.getUserByEmail(email);
-    if (!res || !res.success) {
-      navigate("/dashboard");
-      return;
-    }
-    setName(res.user.name);
-    setVerified(res.user.verified);
-    setGender(res.user.gender);
-    setUser(res.user);
-  };
 
   const handleSubmit = async () => {
     if (name == "") {
       setError("Name is mandatory");
       return;
     }
-    if (gender == null) {
+    if (email == "") {
+      setError("Email is mandatory");
+      return;
+    }
+    if (gender == "") {
       setError("Gender is mandatory");
       return;
     }
@@ -39,40 +27,26 @@ function EditUser() {
       setError("Verified is mandatory");
       return;
     }
-    const newUser = {
-      name: name,
-      gender: gender,
-      verified: verified,
-    };
-    const res = await UserHandler.updateUser(user.email, newUser);
+    const res = await UserHandler.createUser(name, email, gender, verified);
     if (!res) {
       setError("Unexpected error, please try again later");
       return;
     }
     if (!res.success) {
-      setError(res.msg);
+      setError(res.msg || "");
       return;
     }
 
-    alert("User updated successfully!");
+    alert("User created successfully!");
     navigate("/dashboard");
   };
-  React.useEffect(() => {
-    if (!user && params) {
-      getUser(params.email);
-    }
-  }, [user, params]);
 
-  return user ? (
-    <div className="edit-user">
+  return (
+    <div className="add-user">
       <div className="header-all">User management system</div>
-      <div className="header">Edit user</div>
-      <div className="edit-user-container">
-        <form className="edit-user-form">
-          <div className="form-group">
-            <label>Email</label>
-            <div>{user.email}</div>
-          </div>
+      <div className="header">Add user</div>
+      <div className="add-user-container">
+        <form className="add-user-form">
           <div className="form-group">
             <label>Name</label>
             <input
@@ -85,13 +59,23 @@ function EditUser() {
             />
           </div>
           <div className="form-group">
+            <label>Email</label>
+            <input
+              id="email"
+              name="email"
+              placeholder="email"
+              type="text"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+            />
+          </div>
+          <div className="form-group">
             <label>Gender</label>
             <div className="radio-button-container">
               <input
                 name="gender"
                 type="radio"
                 value="Male"
-                defaultChecked={gender == "Male"}
                 onClick={() => setGender("Male")}
               />
               Male
@@ -101,7 +85,6 @@ function EditUser() {
                 name="gender"
                 type="radio"
                 value="Female"
-                defaultChecked={gender == "Female"}
                 onClick={() => setGender("Female")}
               />
               Female
@@ -114,7 +97,6 @@ function EditUser() {
                 name="verified"
                 type="radio"
                 value="true"
-                defaultChecked={verified}
                 onClick={() => setVerified(true)}
               />
               True
@@ -124,7 +106,6 @@ function EditUser() {
                 name="verified"
                 type="radio"
                 value="false"
-                defaultChecked={!verified}
                 onClick={() => setVerified(false)}
               />
               False
@@ -137,16 +118,14 @@ function EditUser() {
                 handleSubmit();
               }}
             >
-              Edit user
+              Add user
             </button>
           </div>
           {error != "" ? <div className="error-alert">{error}</div> : <></>}
         </form>
       </div>
     </div>
-  ) : (
-    <></>
   );
 }
 
-export default EditUser;
+export default AddUser;

@@ -8,22 +8,22 @@ import {
 function EditUser() {
   const navigate = useNavigate();
   const params = useParams();
-  const [user, setUser] = React.useState(null);
-  const [name, setName] = React.useState("");
-  const [verified, setVerified] = React.useState(null);
-  const [gender, setGender] = React.useState(null);
+  const [user, setUser] = React.useState<User | null>(null);
+  const [name, setName] = React.useState<string>("");
+  const [verified, setVerified] = React.useState<boolean | null>(null);
+  const [gender, setGender] = React.useState<string>("");
   const [error, setError] = React.useState("");
 
-  const getUser = async (email) => {
+  const getUser = async (email: string) => {
     const res = await UserHandler.getUserByEmail(email);
     if (!res || !res.success) {
       navigate("/dashboard");
       return;
     }
-    setName(res.user.name);
-    setVerified(res.user.verified);
-    setGender(res.user.gender);
-    setUser(res.user);
+    setName(res.user!.name);
+    setVerified(res.user!.verified);
+    setGender(res.user!.gender);
+    setUser(res.user!);
   };
 
   const handleSubmit = async () => {
@@ -31,7 +31,7 @@ function EditUser() {
       setError("Name is mandatory");
       return;
     }
-    if (gender == null) {
+    if (gender == "") {
       setError("Gender is mandatory");
       return;
     }
@@ -40,17 +40,19 @@ function EditUser() {
       return;
     }
     const newUser = {
+      userId: user!.userId,
+      email: user!.email,
       name: name,
       gender: gender,
       verified: verified,
     };
-    const res = await UserHandler.updateUser(user.email, newUser);
+    const res = await UserHandler.updateUser(user!.email, newUser);
     if (!res) {
       setError("Unexpected error, please try again later");
       return;
     }
     if (!res.success) {
-      setError(res.msg);
+      setError(res.msg || "");
       return;
     }
 
@@ -59,7 +61,7 @@ function EditUser() {
   };
   React.useEffect(() => {
     if (!user && params) {
-      getUser(params.email);
+      getUser(params.email || "");
     }
   }, [user, params]);
 
@@ -114,7 +116,7 @@ function EditUser() {
                 name="verified"
                 type="radio"
                 value="true"
-                defaultChecked={verified}
+                defaultChecked={verified == true}
                 onClick={() => setVerified(true)}
               />
               True
@@ -124,7 +126,7 @@ function EditUser() {
                 name="verified"
                 type="radio"
                 value="false"
-                defaultChecked={!verified}
+                defaultChecked={!verified == true}
                 onClick={() => setVerified(false)}
               />
               False

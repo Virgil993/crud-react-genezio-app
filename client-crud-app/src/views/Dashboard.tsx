@@ -1,9 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { UserHandler } from "@genezio-sdk/crud-react-genezio-app-server_us-east-1";
+import {
+  UserHandler,
+  User,
+} from "@genezio-sdk/crud-react-genezio-app-server_us-east-1";
 
 function Dashboard() {
-  const [users, setUsers] = React.useState(null);
+  const [users, setUsers] = React.useState<Array<User> | null>(null);
   const navigate = useNavigate();
 
   const getAllUsers = async () => {
@@ -12,21 +15,23 @@ function Dashboard() {
       console.log("error at fetching users");
       return;
     }
-    setUsers(res.users);
+    setUsers(res.users || null);
 
     console.log(res.users);
   };
 
-  const deleteUser = async (email) => {
+  const deleteUser = async (email: string) => {
     const res = await UserHandler.deleteUser(email);
     if (!res || !res.success) {
       alert("There was an error at deleting the user, please try again later");
       return;
     }
-    const newUsers = users.filter((element) => {
-      return element.email != email;
-    });
-    setUsers([...newUsers]);
+    if (users != null) {
+      const newUsers = users.filter((element) => {
+        return element.email != email;
+      });
+      setUsers([...newUsers]);
+    }
   };
 
   React.useEffect(() => {

@@ -6,3 +6,4 @@ classes:
   - path: user.ts
     type: jsonrpc
     methods: []
+packageManager: npm

@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { User } from "@genezio-sdk/crud-react-genezio-app-server_us-east-1";
+import { UserHandler } from "@genezio-sdk/crud-react-genezio-app-server_us-east-1";
 
 function AddUser() {
   const [name, setName] = React.useState("");
@@ -27,7 +27,7 @@ function AddUser() {
       setError("Verified is mandatory");
       return;
     }
-    const res = await User.createUser(name, email, gender, verified);
+    const res = await UserHandler.createUser(name, email, gender, verified);
     if (!res) {
       setError("Unexpected error, please try again later");
       return;
